@@ -1,0 +1,115 @@
+<!doctype html>
+
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        
+        <title>healthChat</title>
+
+        <meta name="description" content="healthChat">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/mystyle.css">
+
+  </head>
+  <body style="font-family:Verdana" onload="init();">
+
+
+  <header class="app-header">
+
+        <nav class="nav-bar navbar-white navbar navbar-expand-lg my-auto py-auto">
+          <div class="container-fluid">
+            <!-- .top-bar-brand -->
+            <a class="-navbarbrand" href="#" >
+              <img src="imgs/InterSystemsIRIS_OnFHIR.png" style="margin: 5px;" class="brand-image">
+            </a>
+
+            <a href="/fhir/portal/patientlist.html" target="_blank" style="margin-left: 5%;">Open FHIR Portal</a>
+            
+          </div>
+        </nav>
+    </header>
+
+
+    <div class="container">
+      <div class="row " style="padding-top:40px;">
+        <h3 class="text-center" id="headline" >CHAT ...Loading</h3>
+        <br /><br />
+          <div class="col-md-8">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <p>RECENT CHAT HISTORY</p>
+              </div>
+              <div id="chatdiv" class="panel-body">
+                <ul id="chat" class="media-list">
+
+                  <script language="Cache" runat="Server">
+                    set sql=1
+                    set sql(1)="select Author,TimeStamp,Message from Chat.Message order by TimeStamp"
+                    set rset=##class(%SQL.Statement).%ExecDirect(,.sql)
+                    while (rset.%Next()){
+                       write "<li class=""media""><div class=""media-body""><div class=""media""><p>"_rset.%Get("Author")
+                       write "</p><div class=""media-body"">"
+                       write "<div class=""textmsg"">"
+                       write rset.%Get("Message")
+                       write "</div>"
+                       write "<br /><small class=""text-muted"">"_rset.%Get("TimeStamp")_"</small><hr /></div></div></div></li>"
+                     }
+                     do rset.%Close()
+                    </script>
+
+
+
+                </ul>
+               </div>
+               <div class="panel-footer">
+                <div class="input-group">
+                  <input id="inputline" type="text" class="form-control" placeholder="Enter Message" />
+                  <span class="input-group-btn">
+                    <button class="btn btn-info" type="button" onclick="send();">SEND</button>
+                  </span>
+                </div>
+               </div>
+           </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <p>ONLINE USERS</p>
+            </div>
+            <div class="panel-body">
+
+                    <!-- MY webCam -->
+                    <div>
+                        <h5>Video from webCam</h5>
+                        <video id="myVideo" ></video>
+                    </div>
+                    
+                    <!-- your webCam -->
+                    <div> 
+                        <h5>Video on Server</h5>
+                        <video id="videoServer"></video>
+                    </div>
+
+              <ul id="userlist" class="media-list"></ul>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <!-- IMPORTS JS SYSTEMS  -->
+        <script src="js/chat.js" language="javascript"></script>
+        <script src="js/restFHIR.js" language="javascript"></script>
+        <script src="js/videoCall.js" language="javascript"></script>
+ 
+</html>
