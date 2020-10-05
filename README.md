@@ -2,7 +2,9 @@
  The Project is a telemedicine chat developed using the IRIS platform with WebSockets and FHIR API, which the doctor can use to talk to a patient or other healthcare professional.
  
 # Coming soon
+
 1 Finish the video conference system
+
 2 Greater possibility of consult patients'clinical Observations
 
 # The Software's Architecture 
