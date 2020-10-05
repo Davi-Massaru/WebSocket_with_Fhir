@@ -10,12 +10,17 @@
 The software has divided in the following structure 
 
 Views - \fhirUI\views
+
 Daos -\src\ChatSystem\dao
+
 Dtos -\src\ChatSystem\dto
+
 Services -\src\ChatSystem\services
 
 The WebSockets server: \fhirUI\ServerWebSocket
+
 The REST Api Dispatch: \src\ChatSystem\services\restApi
+
 
 # Installation
 
